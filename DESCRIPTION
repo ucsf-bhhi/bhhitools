@@ -1,0 +1,20 @@
+Package: bhhitools
+Type: Package
+Title: Tools For BHHI R Users
+Version: 0.1.0
+Authors@R: person("Eve", "Perry", email = "eve.perry@ucsf.edu", role = c("aut", "cre"))
+Description: A collection of functions to make R work at BHHI easier.
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    cli,
+    dplyr,
+    keyring,
+    REDCapR,
+    RStata (>= 1.4.0)
+Remotes: 
+    eveyp/RStata
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.2.3

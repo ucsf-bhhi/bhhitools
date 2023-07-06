@@ -1,0 +1,4 @@
+#' bhhitools
+#'
+#' @name bhhitools
+NULL
