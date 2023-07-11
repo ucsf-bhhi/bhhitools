@@ -32,5 +32,11 @@ fake_data <- tibble(
   height = sample(130:215, 100, replace = TRUE),
   weight = sample(35:200, 100, replace = TRUE),
   comments = ch_company(100),
-  venue_2 = sample(1:26, 100, replace = TRUE)
+  venue = sample(1:26, 100, replace = TRUE),
+  gender_identity___0 = sample(0:1, 100, replace = TRUE),
+  gender_identity___1 = sample(0:1, 100, replace = TRUE),
+  gender_identity___2 = sample(0:1, 100, replace = TRUE),
+  yes_no = sample(c(0:1, NA), 100, replace = TRUE),
+  true_false = sample(0:1, 100, replace = TRUE),
+  demographics_complete = 1
 )
