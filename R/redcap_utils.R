@@ -3,9 +3,10 @@
 #' Returns the URL for the REDCap API: https://redcap.ucsf.edu/api/
 #'
 #' @return REDCap API URL
-redcap_api_url = function() {
+redcap_api_url <- function() {
   "https://redcap.ucsf.edu/api/"
 }
+
 
 #' Fetch appropriate REDCap API Token
 #'
@@ -18,7 +19,7 @@ redcap_api_url = function() {
 #' @param project_token_name Name used to store the token via [bhhi_store_token()] or the name of the environment variable with the token.
 #'
 #' @return The API token.
-redcap_token = function(project_token_name) {
+redcap_token <- function(project_token_name) {
   # check that project_token_name is a string
   if (!is.character(project_token_name)) {
     cli::cli_abort(
@@ -30,8 +31,7 @@ redcap_token = function(project_token_name) {
     )
   }
 
-
-  token = tryCatch(
+  token <- tryCatch(
     # if the next line down errors, run this instead
     error = function(cnd) Sys.getenv(project_token_name),
     # run this first

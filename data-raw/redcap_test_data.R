@@ -1,18 +1,18 @@
 library(charlatan)
 library(dplyr)
 
-name_generator = PersonProvider$new()
+name_generator <- PersonProvider$new()
 
-street_names = c(
+street_names <- c(
   "Main Street", "2nd Street", "3rd Street", "4th Street", "5th Street",
   "6th Street", "7th Street", "1st Street", "8th Street", "9th Street"
 )
 
-address = function() {
+address <- function() {
   paste(paste(ch_integer(), sample(street_names, 1)), "San Francisco", "CA", ch_integer(min = 94111, max = 94119), sep = ", ")
 }
 
-dob = function() {
+dob <- function() {
   paste(
     sample(1940:2010, 1),
     sprintf("%02.0f", sample(1:12, 1)),
@@ -21,7 +21,7 @@ dob = function() {
   )
 }
 
-fake_data = tibble(
+fake_data <- tibble(
   first_name = replicate(100, name_generator$first_name()),
   last_name = replicate(100, name_generator$last_name()),
   address = replicate(100, address()),

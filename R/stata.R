@@ -11,12 +11,11 @@
 #'
 #' @return A tibble with the cleaned data.
 #' @export
-bhhi_stata = function(
-  data,
-  do_file,
-  quiet = TRUE,
-  ...
-) {
+bhhi_stata <- function(
+    data,
+    do_file,
+    quiet = TRUE,
+    ...) {
   RStata::stata(
     src = do_file,
     data.in = data,
@@ -29,28 +28,32 @@ bhhi_stata = function(
     dplyr::as_tibble()
 }
 
+
 #' Returns path to Stata binary
 #'
 #' @return Path to Stata binary.
 #' @keywords internal
-get_stata_path = function() {
-  path = getOption("RStata.StataPath", Sys.getenv("STATA_PATH"))
-  if (is.null(path) )
-    path = Sys.which("stata")
+get_stata_path <- function() {
+  path <- getOption("RStata.StataPath", Sys.getenv("STATA_PATH"))
+  if (is.null(path)) {
+    path <- Sys.which("stata")
+  }
 
-  if (is.null(path) | path == "")
+  if (is.null(path) | path == "") {
     stop("Cannot find path to Stata executible.")
+  }
 
   path
 }
 
+
 #' Returns Stata version
 #'
 #' @return Stata version as integer.
-get_stata_version = function() {
-  version = getOption("RStata.StataVersion", Sys.getenv("STATA_VERSION"))
+get_stata_version <- function() {
+  version <- getOption("RStata.StataVersion", Sys.getenv("STATA_VERSION"))
   if (is.null(version)) {
-    version = 17L
+    version <- 17L
   }
 
   as.integer(version)

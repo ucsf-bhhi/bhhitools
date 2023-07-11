@@ -9,6 +9,6 @@
 #'
 #' @examplesIf interactive()
 #' bhhi_store_token("REDCAP_API_TOKEN")
-bhhi_store_token = function(token_name) {
+bhhi_store_token <- function(token_name) {
   keyring::key_set(token_name, prompt = "Enter token:")
 }
