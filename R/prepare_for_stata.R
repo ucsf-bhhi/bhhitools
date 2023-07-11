@@ -1,3 +1,4 @@
+#' @export
 bhhi_prep_for_stata <- function(data) {
   dplyr::rename_with(data, stata_safe_variable_names, everything())
 }

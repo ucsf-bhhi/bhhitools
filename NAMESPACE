@@ -2,6 +2,7 @@
 
 S3method(bhhi_rc_variable_labels,character)
 S3method(bhhi_rc_variable_labels,xml_document)
+export(bhhi_prep_for_stata)
 export(bhhi_rc_read)
 export(bhhi_rc_variable_labels)
 export(bhhi_stata)
