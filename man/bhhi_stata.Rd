@@ -14,7 +14,7 @@ bhhi_stata(data, do_file, quiet = TRUE, ...)
 \item{quiet}{Whether to suppress printing Stata output to the screen.}
 
 \item{...}{Other options for controlling Stata interaction. Passed to
-[RStata::stata()]}
+\code{\link[RStata:stata]{RStata::stata()}}}
 }
 \value{
 A tibble with the cleaned data.

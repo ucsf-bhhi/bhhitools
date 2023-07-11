@@ -7,9 +7,14 @@
 bhhi_store_token(token_name)
 }
 \arguments{
-\item{token_name}{}
+\item{token_name}{Name of the token, a string}
 }
 \description{
-Uses the [keyring][keyring::key_set()] package to securely store API tokens
+Uses \link[keyring:key_get]{keyring} to securely store API tokens
 (e.g. REDCap) in your operating system's credential vault.
+}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+bhhi_store_token("REDCAP_API_TOKEN")
+\dontshow{\}) # examplesIf}
 }
