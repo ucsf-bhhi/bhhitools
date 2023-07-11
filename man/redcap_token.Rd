@@ -7,8 +7,7 @@
 redcap_token(project_token_name)
 }
 \arguments{
-\item{project}{Either "main" (default) for the main REDCap project or "rds"
-for the RDS project.}
+\item{project_token_name}{Name used to store the token via \code{\link[=bhhi_store_token]{bhhi_store_token()}} or the name of the environment variable with the token.}
 }
 \value{
 The API token.

@@ -1,6 +1,6 @@
 #' Securely Store API Tokens
 #'
-#' Uses the [keyring][keyring::key_set()] package to securely store API tokens
+#' Uses [keyring][keyring::key_set()] to securely store API tokens
 #' (e.g. REDCap) in your operating system's credential vault.
 #'
 #' @param token_name Name of the token, a string
