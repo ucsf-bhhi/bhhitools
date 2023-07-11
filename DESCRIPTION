@@ -9,9 +9,11 @@ LazyData: true
 Imports: 
     cli,
     dplyr,
+    httr2,
     keyring,
     REDCapR,
-    RStata (>= 1.4.0)
+    RStata (>= 1.4.0),
+    xml2
 Remotes: 
     eveyp/RStata
 Suggests: 

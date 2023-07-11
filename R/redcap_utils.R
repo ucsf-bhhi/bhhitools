@@ -50,3 +50,18 @@ redcap_token <- function(project_token_name) {
 
   token
 }
+
+
+rc_project_xml <- function(project_token_name) {
+  httr2::request(redcap_api_url()) |>
+    httr2::req_body_form(
+      token = redcap_token(project_token_name),
+      content = "project_xml",
+      format = "xml",
+      returnMetadataOnly = "true",
+      exportSurveyFields = "true",
+    ) |>
+    httr2::req_perform() |>
+    httr2::resp_body_xml() |>
+    xml2::xml_ns_strip()
+}
