@@ -1,5 +1,5 @@
 #' @export
-bhhi_prep_for_stata <- function(data) {
+bhhi_stata_prep <- function(data) {
   dplyr::rename_with(data, stata_safe_variable_names, everything())
 }
 
