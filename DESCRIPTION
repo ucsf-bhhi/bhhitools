@@ -12,11 +12,12 @@ Imports:
     httr2,
     keyring,
     readr,
-    REDCapR,
+    REDCapR (>= 1.1.9005),
     RStata (>= 1.4.0),
     xml2
-Remotes: 
-    eveyp/RStata
+Remotes:  
+    eveyp/RStata,
+    OuhscBbmc/REDCapR
 Suggests: 
     rlang,
     testthat (>= 3.0.0),
