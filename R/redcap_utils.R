@@ -3,6 +3,7 @@
 #' Returns the URL for the REDCap API: https://redcap.ucsf.edu/api/
 #'
 #' @return REDCap API URL
+#' @keywords internal
 redcap_api_url <- function() {
   "https://redcap.ucsf.edu/api/"
 }
@@ -19,6 +20,7 @@ redcap_api_url <- function() {
 #' @param project_token_name Name used to store the token via [bhhi_store_token()] or the name of the environment variable with the token.
 #'
 #' @return The API token.
+#' @keywords internal
 redcap_token <- function(project_token_name) {
   # check that project_token_name is a string
   if (!is.character(project_token_name)) {
