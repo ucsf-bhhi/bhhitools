@@ -1,4 +1,6 @@
 test_that("auto types, factor conversion works", {
+  skip_on_ci()
+
   withr::local_envvar(BHHITOOLS_TESTING_TOKEN = test_token)
 
   bhhi_rc_read(
@@ -10,6 +12,8 @@ test_that("auto types, factor conversion works", {
 })
 
 test_that("auto types, no factor conversion works", {
+  skip_on_ci()
+
   withr::local_envvar(BHHITOOLS_TESTING_TOKEN = test_token)
 
   bhhi_rc_read(
@@ -21,6 +25,8 @@ test_that("auto types, no factor conversion works", {
 })
 
 test_that("guess types, factor conversion works", {
+  skip_on_ci()
+
   withr::local_envvar(BHHITOOLS_TESTING_TOKEN = test_token)
 
   bhhi_rc_read(
@@ -32,6 +38,8 @@ test_that("guess types, factor conversion works", {
 })
 
 test_that("guess types, no factor conversion works", {
+  skip_on_ci()
+
   withr::local_envvar(BHHITOOLS_TESTING_TOKEN = test_token)
 
   bhhi_rc_read(
@@ -43,6 +51,8 @@ test_that("guess types, no factor conversion works", {
 })
 
 test_that("string types, factor conversion works", {
+  skip_on_ci()
+
   withr::local_envvar(BHHITOOLS_TESTING_TOKEN = test_token)
 
   bhhi_rc_read(
@@ -54,6 +64,8 @@ test_that("string types, factor conversion works", {
 })
 
 test_that("string types, no factor conversion works", {
+  skip_on_ci()
+
   withr::local_envvar(BHHITOOLS_TESTING_TOKEN = test_token)
 
   bhhi_rc_read(

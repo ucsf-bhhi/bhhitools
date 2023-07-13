@@ -4,6 +4,8 @@
 # bhhitools <img src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/ucsf-bhhi/bhhitools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ucsf-bhhi/bhhitools/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 A collection of functions to make R work at BHHI easier.
