@@ -11,6 +11,7 @@ Imports:
     dplyr,
     httr2,
     keyring,
+    readr,
     REDCapR,
     RStata (>= 1.4.0),
     xml2
