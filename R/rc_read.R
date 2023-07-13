@@ -89,7 +89,7 @@ bhhi_rc_convert_binary <- function(data, metadata) {
 }
 
 set_parse_args = function(mode, project_token_name) {
-  if (!(class(mode) == "col_spec" || mode %in% c("string", "guess", "auto"))) {
+  if (!(inherits(mode, "col_spec") || mode %in% c("string", "guess", "auto"))) {
     cli::cli_abort(
       message = c(
         "!" = 'col_types must either be one of "string", "guess", or "auto" or a {.fn readr::cols} object.'
@@ -100,7 +100,7 @@ set_parse_args = function(mode, project_token_name) {
 
   parse_args = list(col_types = NULL, guess_type = FALSE)
 
-  if (class(mode) == "col_spec") {
+  if (inherits(mode, "col_spec")) {
     parse_args$col_types = mode
   } else if (mode == "string") {
     parse_args$col_types = readr::cols(.default = readr::col_character())
