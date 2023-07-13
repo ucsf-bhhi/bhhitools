@@ -1,5 +1,4 @@
 test_that("auto types, factor conversion works", {
-  skip_on_ci()
 
   withr::local_envvar(BHHITOOLS_TESTING_TOKEN = test_token)
 
