@@ -11,7 +11,7 @@
 #'
 #' @return A tibble with the cleaned data.
 #' @export
-bhhi_stata <- function(
+bhhi_stata_do <- function(
     data,
     do_file,
     quiet = TRUE,
@@ -50,6 +50,7 @@ get_stata_path <- function() {
 #' Returns Stata version
 #'
 #' @return Stata version as integer.
+#' @keywords internal
 get_stata_version <- function() {
   version <- getOption("RStata.StataVersion", Sys.getenv("STATA_VERSION"))
   if (is.null(version)) {
