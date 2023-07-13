@@ -6,7 +6,7 @@ test_that("stata name prep works", {
       abcdefghijklmnopqrstuvwxyzabcdefghijkl = 3,
       `0x` = 4
     ) |>
-      bhhi_prep_for_stata(),
+      bhhi_stata_prep(),
     dplyr::tibble(
       x = 1,
       y_y = 2,

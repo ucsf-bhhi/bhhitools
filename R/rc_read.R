@@ -53,7 +53,7 @@ bhhi_rc_read <- function(
     data <- bhhi_rc_convert_factors(data, variable_labels)
   }
 
-  if (for_stata) data <- prepare_for_stata(data)
+  if (for_stata) data <- bhhi_stata_prep(data)
 
   data
 }
