@@ -26,8 +26,8 @@ bhhi_rc_variable_labels <- function(x) {
 }
 
 #' @export
-bhhi_rc_variable_labels.xml_document <- function(project_xml) {
-  code_list <- xml2::xml_find_all(project_xml, ".//CodeList")
+bhhi_rc_variable_labels.xml_document <- function(x) {
+  code_list <- xml2::xml_find_all(x, ".//CodeList")
 
   variables <- xml2::xml_attr(code_list, "Variable")
   n_values <- xml2::xml_length(code_list)
