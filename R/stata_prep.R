@@ -15,7 +15,7 @@
 #'
 #' @export
 bhhi_stata_prep <- function(data) {
-  dplyr::rename_with(data, stata_safe_variable_names, everything())
+  dplyr::rename_with(data, stata_safe_variable_names, dplyr::everything())
 }
 
 
