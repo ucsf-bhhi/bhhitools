@@ -1,0 +1,18 @@
+url: https://ucsf-bhhi.github.io/bhhitools/
+template:
+  bootstrap: 5
+  bslib:
+    bg: "white"
+    fg: "black"
+    primary: "#052049"
+    headings-color: "#052049"
+navbar:
+  bg: primary
+home:
+  sidebar:
+    structure: [links, authors, dev]
+reference:
+  - title: REDCap
+  - contents: [starts_with("bhhi_rc"), bhhi_store_token]
+  - title: Stata
+  - contents: starts_with("bhhi_stata")
