@@ -12,6 +12,8 @@ home:
   sidebar:
     structure: [links, authors, dev]
 reference:
+  - title: General tools
+  - contents: bhhi_shared_drive
   - title: REDCap
   - contents: [starts_with("bhhi_rc"), bhhi_store_token]
   - title: Stata
