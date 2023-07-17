@@ -16,10 +16,16 @@
     <loc>https://ucsf-bhhi.github.io/bhhitools/index.html</loc>
   </url>
   <url>
+    <loc>https://ucsf-bhhi.github.io/bhhitools/news/index.html</loc>
+  </url>
+  <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_rc_read.html</loc>
   </url>
   <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_rc_variable_labels.html</loc>
+  </url>
+  <url>
+    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_shared_drive.html</loc>
   </url>
   <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_stata_do.html</loc>
