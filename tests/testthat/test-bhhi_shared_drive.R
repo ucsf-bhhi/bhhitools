@@ -8,11 +8,11 @@ test_that("shared drive paths work", {
   # drive roots
   expect_equal(
     bhhi_shared_drive(),
-    shared_drive_path
+    file.path(shared_drive_path)
   )
   expect_equal(
     bhhi_shared_drive(envvar_name = "ALT_BHHI_SHARED_DRIVE"),
-    alt_shared_drive_path
+    file.path(alt_shared_drive_path)
   )
 
   # paths to files
