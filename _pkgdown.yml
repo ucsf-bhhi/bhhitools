@@ -1,11 +1,18 @@
 url: https://ucsf-bhhi.github.io/bhhitools/
 template:
   bootstrap: 5
+  bootswatch: lumen
+  theme: a11y-light
   bslib:
     bg: "white"
     fg: "black"
+    navbar-dark-brand-color: "#E2F4FC"
     primary: "#052049"
     headings-color: "#052049"
+    base_font: {google: "Lato"}
+    heading_font: {google: "Lato"}
+    code_font: {google: "Fira Code"}
+    line-height-base: 1.6
 navbar:
   bg: primary
 home:
