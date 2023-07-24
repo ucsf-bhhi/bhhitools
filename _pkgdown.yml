@@ -6,9 +6,6 @@ template:
   bslib:
     bg: "white"
     fg: "black"
-    navbar-color: "white"
-    navbar-light-color: "white"
-    nav-link-color: "white"
     primary: "#052049"
     headings-color: "#052049"
     base_font: {google: "Lato"}
@@ -17,6 +14,7 @@ template:
     line-height-base: 1.6
 navbar:
   bg: primary
+  type: dark
 home:
   sidebar:
     structure: [links, authors, dev]
