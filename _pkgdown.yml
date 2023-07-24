@@ -4,8 +4,6 @@ template:
   bootswatch: lumen
   theme: a11y-light
   bslib:
-    bg: "white"
-    fg: "black"
     primary: "#052049"
     headings-color: "#052049"
     base_font: {google: "Lato"}
