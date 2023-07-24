@@ -16,6 +16,7 @@ template:
     line-height-base: 1.6
 navbar:
   bg: primary
+  type: dark
 home:
   sidebar:
     structure: [links, authors, dev]
