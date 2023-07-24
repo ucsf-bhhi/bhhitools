@@ -6,7 +6,8 @@ template:
   bslib:
     bg: "white"
     fg: "black"
-    navbar-dark-brand-color: "white"
+    navbar-color: "white"
+    nav-link-color: "white"
     primary: "#052049"
     headings-color: "#052049"
     base_font: {google: "Lato"}
