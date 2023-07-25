@@ -1,7 +1,8 @@
 #' Parse REDCap Variable Labels
 #'
 #' Use the REDCap project metadata to parse the variable labels. Creates a
-#' tibble with the values and labels for each categorical variable.
+#' tibble with the values and labels for each categorical variable. Boolean
+#' variables (checkbox, yes/no, or true/false) are not included.
 #'
 #' When provided with the name of an API token, it will download the project XML
 #' from REDCap and then parse it.
@@ -27,9 +28,9 @@ bhhi_rc_variable_labels <- function(x) {
 
 #' @export
 bhhi_rc_variable_labels.xml_document <- function(x) {
-  code_list <- xml2::xml_find_all(x, ".//CodeList")
+  code_list <- xml2::xml_find_all(x, ".//CodeList[@DataType!='boolean']")
 
-  variables <- xml2::xml_attr(code_list, "Variable")
+  variables <- xml2::xml_attr(code_list, "Name")
   n_values <- xml2::xml_length(code_list)
 
   code_list_items <- xml2::xml_find_all(code_list, ".//CodeListItem")

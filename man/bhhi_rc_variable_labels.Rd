@@ -21,7 +21,8 @@ A tibble with three columns:
 }
 \description{
 Use the REDCap project metadata to parse the variable labels. Creates a
-tibble with the values and labels for each categorical variable.
+tibble with the values and labels for each categorical variable. Boolean
+variables (checkbox, yes/no, or true/false) are not included.
 }
 \details{
 When provided with the name of an API token, it will download the project XML
