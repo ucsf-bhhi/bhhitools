@@ -6,10 +6,6 @@ template:
   bslib:
     primary: "#052049"
     headings-color: "#052049"
-    navbar-light-brand-color: "white"
-    navbar-dark-brand-color: "white"
-    nav-link-color: "white"
-    navbar-color: "white"
     base_font: {google: "Lato"}
     heading_font: {google: "Lato"}
     code_font: {google: "Fira Code"}
