@@ -23,3 +23,5 @@ reference:
   - contents: [starts_with("bhhi_rc"), bhhi_store_token]
   - title: Stata
   - contents: starts_with("bhhi_stata")
+  - title: Formatting/Visual Style
+  - contents: bhhi_format_table
