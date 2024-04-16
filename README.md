@@ -27,7 +27,8 @@ remotes::install_github("ucsf-bhhi/bhhitools")
 
 `bhhitools` can download data from REDCap and automatically convert
 categorical variables to factor variables while leaving text fields
-alone.
+alone. (Note: All data below is randomly generated and does not
+correspond to any real person.)
 
 ``` r
 library(bhhitools)
