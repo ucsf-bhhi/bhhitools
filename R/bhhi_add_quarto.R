@@ -4,14 +4,14 @@
 #' from GitHub.
 #'
 #' @export
-bhhi_install_quarto_format <- function() {
+bhhi_add_quarto <- function() {
   cli::cli_alert_info(
     "Installing the {.href [BHHI Quarto format](https://github.com/ucsf-bhhi/bhhi-quarto)} from GitHub..."
   )
 
-  install_quarto_format()
+  add_quarto_format()
 }
 
-install_quarto_format <- function() {
-  quarto::quarto_add_extension(extension = "ucsf-bhhi/bhhi-quarto")
+add_quarto_format <- function(...) {
+  quarto::quarto_add_extension(extension = "ucsf-bhhi/bhhi-quarto", ...)
 }
