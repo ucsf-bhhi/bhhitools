@@ -17,7 +17,7 @@ bhhi_new_quarto <- function(filename = "bhhi-quarto.qmd", open = TRUE) {
     # if the template exists copy it to the current directory
   } else if (fs::file_exists(fs::path(bhhi_quarto_path(), "template.qmd"))) {
     copy_template(filename, open)
-    # if the user approves overwrite the format with a new version with the template
+    # if template doesn't exist download it and use it
   } else {
     cli::cli_alert_warning("BHHI Quarto template not found.")
     cli::cli_alert_info(
