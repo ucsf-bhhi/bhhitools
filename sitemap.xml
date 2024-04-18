@@ -19,7 +19,13 @@
     <loc>https://ucsf-bhhi.github.io/bhhitools/news/index.html</loc>
   </url>
   <url>
+    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_add_quarto.html</loc>
+  </url>
+  <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_format_table.html</loc>
+  </url>
+  <url>
+    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_new_quarto.html</loc>
   </url>
   <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_rc_read.html</loc>
