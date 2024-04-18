@@ -1,3 +1,5 @@
+skip_if_offline("redcap.ucsf.edu")
+
 test_that("auto types, factor conversion works", {
   withr::local_envvar(BHHITOOLS_TESTING_TOKEN = test_token)
 

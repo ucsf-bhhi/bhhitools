@@ -24,4 +24,4 @@ reference:
   - title: Stata
   - contents: starts_with("bhhi_stata")
   - title: Formatting/Visual Style
-  - contents: bhhi_format_table
+  - contents: [bhhi_new_quarto, bhhi_add_quarto, bhhi_format_table]

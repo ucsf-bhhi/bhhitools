@@ -2,7 +2,9 @@
 
 S3method(bhhi_rc_variable_labels,character)
 S3method(bhhi_rc_variable_labels,xml_document)
+export(bhhi_add_quarto)
 export(bhhi_format_table)
+export(bhhi_new_quarto)
 export(bhhi_rc_read)
 export(bhhi_rc_variable_labels)
 export(bhhi_shared_drive)
