@@ -58,7 +58,7 @@ notify_file_created = function(filename) {
 
 open_file = function(open, filename) {
   if (open & interactive()) {
-    file.edit(filename)
+    utils::file.edit(filename)
   }
 }
 
