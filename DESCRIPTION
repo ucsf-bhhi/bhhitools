@@ -18,13 +18,16 @@ Imports:
     REDCapR (>= 1.1.9005),
     rlang,
     RStata (>= 1.4.0),
+    srvyr,
     withr,
     xml2
 Remotes: 
     eveyp/RStata,
     OuhscBbmc/REDCapR
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    survey,
+    stringr
 Config/testthat/edition: 3
 RoxygenNote: 7.3.1
 URL: https://github.com/ucsf-bhhi/bhhitools,
