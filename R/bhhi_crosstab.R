@@ -18,7 +18,7 @@ bhhi_crosstab = function(.data,
   )
 
   if (add_n) {
-    n = rlang::exprs(n = n())
+    n = rlang::exprs(n = srvyr::n())
   } else {
     n = NULL
   }
@@ -29,7 +29,7 @@ bhhi_crosstab = function(.data,
     srvyr::group_by(!!!groups) |>
     bhhi_cascade(
       !!!n,
-      survey_prop(
+      srvyr::survey_prop(
         vartype = vartype,
         level = level,
         proportion = TRUE,
