@@ -2,7 +2,7 @@ bhhi_format_crosstab = function(.data, decimals = 1, rowname_col = NULL) {
   if (is.null(rowname_col)) rowname_col = names(.data[1])
 
   if (!detect_vartype(.data) & !detect_ci(.data)) {
-    .data = dplyr::rename_with(.data, \(x) str_remove(x, "_coef"))
+    .data = dplyr::rename_with(.data, \(x) stringr::str_remove(x, "_coef"))
   }
 
   gt_table = .data |>
