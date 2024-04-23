@@ -1,12 +1,12 @@
 bhhi_crosstab = function(.data,
-                            row_var,
-                            col_var,
-                            pct_direction = "col",
-                            add_n = FALSE,
-                            vartype = c("se", "ci", "var", "cv"),
-                            level = 0.95,
-                            proportion = TRUE,
-                            na.rm = FALSE) {
+                         row_var,
+                         col_var,
+                         pct_direction = "col",
+                         add_n = FALSE,
+                         vartype = c("se", "ci", "var", "cv"),
+                         level = 0.95,
+                         proportion = TRUE,
+                         na.rm = FALSE) {
   groups = switch(
     pct_direction,
     "row" = rlang::ensyms(row_var, col_var),
