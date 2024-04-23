@@ -1,7 +1,7 @@
 skip_if_offline("github.com")
 
 test_that("bhhi_add_quarto() works", {
-  tempdir = withr::local_tempdir()
+  tempdir <- withr::local_tempdir()
   withr::local_dir(tempdir)
 
   mock_add_quarto_format()

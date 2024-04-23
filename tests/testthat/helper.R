@@ -1,10 +1,10 @@
-test_token = Sys.getenv("BHHITOOLS_DEMO")
+test_token <- Sys.getenv("BHHITOOLS_DEMO")
 
-test_data = function(filename) {
+test_data <- function(filename) {
   readRDS(testthat::test_path(file.path("test-data", filename)))
 }
 
-mock_add_quarto_format = function() {
+mock_add_quarto_format <- function() {
   with_mocked_bindings(
     bhhi_add_quarto(),
     add_quarto_format = function() {
@@ -13,7 +13,7 @@ mock_add_quarto_format = function() {
   )
 }
 
-create_test_svy_tbl = function() {
+create_test_svy_tbl <- function() {
   # specify the current (ie. inside the function environment) so the dataset
   # isn't loaded into the global environment and doesn't persits after the
   # function exits
@@ -29,16 +29,16 @@ create_test_svy_tbl = function() {
     srvyr::as_survey(weights = WTMEC2YR)
 }
 
-expect_gt_output = function(x, filename) {
+expect_gt_output <- function(x, filename) {
   skip_on_ci()
 
-  output_file = withr::local_tempfile(fileext = ".png")
+  output_file <- withr::local_tempfile(fileext = ".png")
 
   gt::gtsave(x, output_file)
   expect_snapshot_file(path = output_file, name = fs::path(filename, ext = "png"))
 }
 
-expect_equal_bhhi_srvyr = function(bhhi, srvyr) {
+expect_equal_bhhi_srvyr <- function(bhhi, srvyr) {
   expect_equal(
     bhhi |>
       dplyr::ungroup() |>

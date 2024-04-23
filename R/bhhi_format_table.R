@@ -16,20 +16,23 @@
 #'   dplyr::as_tibble(rownames = "car") |>
 #'   gt::gt(rowname_col = "car") |>
 #'   bhhi_format_table()
-bhhi_format_table = function(table, full_width = TRUE, left_align_stub = TRUE) {
-  if (!inherits(table, "gt_tbl"))
+bhhi_format_table <- function(table, full_width = TRUE, left_align_stub = TRUE) {
+  if (!inherits(table, "gt_tbl")) {
     cli::cli_abort(
       message = c(
-        "!" = 'table must be a {.fn gt::gt} table.'
+        "!" = "table must be a {.fn gt::gt} table."
       ),
       call = rlang::caller_env()
     )
+  }
 
-  if (full_width)
-    table = gt::tab_options(table, table.width = "100%")
+  if (full_width) {
+    table <- gt::tab_options(table, table.width = "100%")
+  }
 
-  if (left_align_stub)
-    table = gt::tab_style(table, gt::cell_text(align = "left"), gt::cells_stub())
+  if (left_align_stub) {
+    table <- gt::tab_style(table, gt::cell_text(align = "left"), gt::cells_stub())
+  }
 
   table
 }

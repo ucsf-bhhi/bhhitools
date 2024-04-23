@@ -1,7 +1,7 @@
 test_that("bhhi_reshape_crosstab works with vartype", {
-  nhanes = create_test_svy_tbl()
+  nhanes <- create_test_svy_tbl()
 
-  test_result = nhanes |>
+  test_result <- nhanes |>
     srvyr::group_by(race, gender) |>
     bhhi_cascade(
       srvyr::survey_prop(
@@ -18,9 +18,9 @@ test_that("bhhi_reshape_crosstab works with vartype", {
 })
 
 test_that("bhhi_reshape_crosstab works with no vartype", {
-  nhanes = create_test_svy_tbl()
+  nhanes <- create_test_svy_tbl()
 
-  test_result = nhanes |>
+  test_result <- nhanes |>
     srvyr::group_by(race, gender) |>
     bhhi_cascade(
       srvyr::survey_prop(vartype = NULL, proportion = FALSE)

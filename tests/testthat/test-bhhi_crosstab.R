@@ -1,5 +1,5 @@
 test_that("bhhi_crosstab col percentage works", {
-  bhhi_result = create_test_svy_tbl() |>
+  bhhi_result <- create_test_svy_tbl() |>
     bhhi_crosstab(
       row_var = race,
       col_var = gender,
@@ -7,7 +7,7 @@ test_that("bhhi_crosstab col percentage works", {
       vartype = "se"
     )
 
-  srvyr_result = dplyr::bind_rows(
+  srvyr_result <- dplyr::bind_rows(
     create_test_svy_tbl() |>
       srvyr::group_by(gender, race) |>
       srvyr::summarise(srvyr::survey_prop(proportion = TRUE)),
@@ -21,7 +21,7 @@ test_that("bhhi_crosstab col percentage works", {
 })
 
 test_that("bhhi_crosstab col percentage add_n works", {
-  bhhi_result = create_test_svy_tbl() |>
+  bhhi_result <- create_test_svy_tbl() |>
     bhhi_crosstab(
       row_var = race,
       col_var = gender,
@@ -30,7 +30,7 @@ test_that("bhhi_crosstab col percentage add_n works", {
       add_n = TRUE
     )
 
-  srvyr_result = dplyr::bind_rows(
+  srvyr_result <- dplyr::bind_rows(
     create_test_svy_tbl() |>
       srvyr::group_by(gender, race) |>
       srvyr::summarise(n = srvyr::n(), srvyr::survey_prop(proportion = TRUE)),
@@ -44,7 +44,7 @@ test_that("bhhi_crosstab col percentage add_n works", {
 })
 
 test_that("bhhi_crosstab row percentage works", {
-  bhhi_result = create_test_svy_tbl() |>
+  bhhi_result <- create_test_svy_tbl() |>
     bhhi_crosstab(
       row_var = race,
       col_var = gender,
@@ -52,7 +52,7 @@ test_that("bhhi_crosstab row percentage works", {
       vartype = "se"
     )
 
-  srvyr_result = dplyr::bind_rows(
+  srvyr_result <- dplyr::bind_rows(
     create_test_svy_tbl() |>
       srvyr::group_by(race, gender) |>
       srvyr::summarise(srvyr::survey_prop(proportion = TRUE)),
@@ -66,7 +66,7 @@ test_that("bhhi_crosstab row percentage works", {
 })
 
 test_that("bhhi_crosstab row percentage add_n works", {
-  bhhi_result = create_test_svy_tbl() |>
+  bhhi_result <- create_test_svy_tbl() |>
     bhhi_crosstab(
       row_var = race,
       col_var = gender,
@@ -75,7 +75,7 @@ test_that("bhhi_crosstab row percentage add_n works", {
       vartype = "se"
     )
 
-  srvyr_result = dplyr::bind_rows(
+  srvyr_result <- dplyr::bind_rows(
     create_test_svy_tbl() |>
       srvyr::group_by(race, gender) |>
       srvyr::summarise(n = srvyr::n(), srvyr::survey_prop(proportion = TRUE)),
@@ -89,7 +89,7 @@ test_that("bhhi_crosstab row percentage add_n works", {
 })
 
 test_that("bhhi_crosstab ci works", {
-  bhhi_result = create_test_svy_tbl() |>
+  bhhi_result <- create_test_svy_tbl() |>
     bhhi_crosstab(
       row_var = race,
       col_var = gender,
@@ -97,7 +97,7 @@ test_that("bhhi_crosstab ci works", {
       vartype = "ci"
     )
 
-  srvyr_result = dplyr::bind_rows(
+  srvyr_result <- dplyr::bind_rows(
     create_test_svy_tbl() |>
       srvyr::group_by(gender, race) |>
       srvyr::summarise(srvyr::survey_prop(proportion = TRUE, vartype = "ci")),
@@ -111,7 +111,7 @@ test_that("bhhi_crosstab ci works", {
 })
 
 test_that("bhhi_crosstab ci level works", {
-  bhhi_result = create_test_svy_tbl() |>
+  bhhi_result <- create_test_svy_tbl() |>
     bhhi_crosstab(
       row_var = race,
       col_var = gender,
@@ -120,11 +120,12 @@ test_that("bhhi_crosstab ci level works", {
       level = 0.90
     )
 
-  srvyr_result = dplyr::bind_rows(
+  srvyr_result <- dplyr::bind_rows(
     create_test_svy_tbl() |>
       srvyr::group_by(gender, race) |>
       srvyr::summarise(
-        srvyr::survey_prop(proportion = TRUE, vartype = "ci", level = 0.90)),
+        srvyr::survey_prop(proportion = TRUE, vartype = "ci", level = 0.90)
+      ),
     create_test_svy_tbl() |>
       srvyr::group_by(race) |>
       srvyr::summarise(
@@ -137,7 +138,7 @@ test_that("bhhi_crosstab ci level works", {
 })
 
 test_that("bhhi_crosstab vartype null works", {
-  bhhi_result = create_test_svy_tbl() |>
+  bhhi_result <- create_test_svy_tbl() |>
     bhhi_crosstab(
       row_var = race,
       col_var = gender,
@@ -145,7 +146,7 @@ test_that("bhhi_crosstab vartype null works", {
       vartype = NULL
     )
 
-  srvyr_result = dplyr::bind_rows(
+  srvyr_result <- dplyr::bind_rows(
     create_test_svy_tbl() |>
       srvyr::group_by(gender, race) |>
       srvyr::summarise(srvyr::survey_prop(proportion = TRUE, vartype = NULL)),
@@ -159,7 +160,7 @@ test_that("bhhi_crosstab vartype null works", {
 })
 
 test_that("bhhi_crosstab proportion false works", {
-  bhhi_result = create_test_svy_tbl() |>
+  bhhi_result <- create_test_svy_tbl() |>
     bhhi_crosstab(
       row_var = race,
       col_var = gender,
@@ -168,7 +169,7 @@ test_that("bhhi_crosstab proportion false works", {
       proportion = FALSE
     )
 
-  srvyr_result = dplyr::bind_rows(
+  srvyr_result <- dplyr::bind_rows(
     create_test_svy_tbl() |>
       srvyr::group_by(gender, race) |>
       srvyr::summarise(srvyr::survey_prop(proportion = FALSE)),

@@ -1,14 +1,14 @@
-bhhi_gt_crosstab = function(.data,
-                            row_var,
-                            col_var,
-                            pct_direction = "col",
-                            add_n = FALSE,
-                            vartype = c("se", "ci", "var", "cv"),
-                            level = 0.95,
-                            proportion = TRUE,
-                            decimals = 1,
-                            na.rm = FALSE) {
-  if (missing(vartype)) vartype = NULL
+bhhi_gt_crosstab <- function(.data,
+                             row_var,
+                             col_var,
+                             pct_direction = "col",
+                             add_n = FALSE,
+                             vartype = c("se", "ci", "var", "cv"),
+                             level = 0.95,
+                             proportion = TRUE,
+                             decimals = 1,
+                             na.rm = FALSE) {
+  if (missing(vartype)) vartype <- NULL
 
   bhhi_crosstab(
     .data,
