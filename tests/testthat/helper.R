@@ -28,3 +28,12 @@ create_test_svy_tbl = function() {
     ) |>
     srvyr::as_survey(weights = WTMEC2YR)
 }
+
+expect_gt_output = function(x, filename) {
+  skip_on_ci()
+
+  output_file = withr::local_tempfile(fileext = ".png")
+
+  gt::gtsave(x, output_file)
+  expect_snapshot_file(path = output_file, name = fs::path(filename, ext = "png"))
+}
