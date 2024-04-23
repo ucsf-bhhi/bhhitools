@@ -37,3 +37,15 @@ expect_gt_output = function(x, filename) {
   gt::gtsave(x, output_file)
   expect_snapshot_file(path = output_file, name = fs::path(filename, ext = "png"))
 }
+
+expect_equal_bhhi_srvyr = function(bhhi, srvyr) {
+  expect_equal(
+    bhhi |>
+      dplyr::ungroup() |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.factor), as.character)),
+    srvyr |>
+      dplyr::ungroup() |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.factor), as.character)),
+    ignore_attr = TRUE
+  )
+}
