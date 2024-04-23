@@ -19,6 +19,7 @@ Imports:
     rlang,
     RStata (>= 1.4.0),
     srvyr,
+    tidyr,
     withr,
     xml2
 Remotes: 
