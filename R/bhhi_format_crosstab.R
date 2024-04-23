@@ -13,8 +13,10 @@ bhhi_format_crosstab = function(.data, decimals = 1, rowname_col = NULL) {
     gt::fmt_number(columns = gt::ends_with("_deff"), decimals = decimals) |>
     gt::cols_label(gt::ends_with("_n") ~ "N")
 
+  column_name_stems = get_column_name_stems(.data)
+
   if (detect_vartype(.data)) {
-    for (span in get_column_name_stems(.data)) {
+    for (span in column_name_stems) {
       gt_table = gt_table |>
         gt::tab_spanner(label = span, columns = gt::starts_with(span)) |>
         gt::cols_label(
@@ -28,14 +30,18 @@ bhhi_format_crosstab = function(.data, decimals = 1, rowname_col = NULL) {
   }
 
   if (detect_ci(.data)) {
+    for (stem in column_name_stems) {
+      gt_table = gt_table |>
+        gt::cols_merge_range(
+          col_begin =  glue::glue("{stem}_low"),
+          col_end = glue::glue("{stem}_upp")
+        )
+    }
     gt_table = gt_table |>
-      gt::cols_merge_range(
-        col_begin =  gt::ends_with("_low"),
-        col_end = gt::ends_with("_upp")
-      ) |>
       gt::cols_label(
         gt::ends_with("_coef") ~ "Percent",
-        gt::ends_with("_low") ~ "Conf. Interval")
+        gt::ends_with("_low") ~ "Conf. Interval"
+      )
   }
 
   bhhi_format_table(gt_table)
