@@ -1,3 +1,11 @@
+# bhhitools 0.5.0
+
+* Adds tools for making survey crosstabs easier: `bhhi_crosstab()`, `bhhi_gt_crosstab()`, `bhhi_cascade()`, `bhhi_reshape_crosstab()`, & `bhhi_format_crosstab()`.
+
+# bhhitools 0.4.0
+
+* Adds tools for working with the [BHHI Quarto format](https://github.com/ucsf-bhhi/bhhi-quarto): `bhhi_new_quarto()` & `bhhi_add_quarto()`. 
+
 # bhhitools 0.3.0
 
 * Adds `bhhi_format_table()` which applies common formatting to tables output in Quarto, R Markdown, etc. 
