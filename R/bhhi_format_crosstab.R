@@ -1,13 +1,40 @@
-bhhi_format_crosstab <- function(.data, decimals = 1, rowname_col = NULL) {
-  if (is.null(rowname_col)) rowname_col <- names(.data[1])
-
+#' Create Formatted Table  From a Reshaped Crosstab
+#'
+#' Creates a formatted table via the [`gt`] package from a survey crosstab that has been reshaped via [`bhhi_reshape_crosstab()`].
+#'
+#' @param .data A tibble from [`bhhi_reshape_crosstab()`]
+#' @inheritParams bhhi_gt_crosstab
+#'
+#' @export
+#'
+#' @section Examples:
+#' ```r
+#' data("nhanes", package = "survey")
+#'
+#' survey_object <- nhanes |>
+#'   dplyr::rename(gender = RIAGENDR) |>
+#'   dplyr::mutate(
+#'     gender = factor(gender, 1:2, c("Male", "Female")),
+#'     race = factor(race, 1:4, c("Hispanic", "White", "Black", "Other"))
+#'   ) |>
+#'   srvyr::as_survey(weights = WTMEC2YR)
+#'
+#' survey_object |>
+#'   bhhi_crosstab(race, gender) |>
+#'   bhhi_reshape_crosstab(race, gender) |>
+#'   bhhi_format_crosstab()
+#' ```
+#' \if{html}{\out{
+#' <img src='man_bhhi_format_crosstab_1.png' class='gt-example-img'>
+#' }}
+bhhi_format_crosstab <- function(.data, decimals = 1) {
   if (!detect_vartype(.data) & !detect_ci(.data)) {
     .data <- dplyr::rename_with(.data, \(x) stringr::str_remove(x, "_coef"))
   }
 
   gt_table <- .data |>
     dplyr::ungroup() |>
-    gt::gt(rowname_col = rowname_col) |>
+    gt::gt(rowname_col = names(.data[1])) |>
     gt::fmt_percent(decimals = decimals) |>
     gt::fmt_integer(columns = gt::ends_with("_n")) |>
     gt::fmt_number(columns = gt::ends_with("_deff"), decimals = decimals) |>

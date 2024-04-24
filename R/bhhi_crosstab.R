@@ -1,3 +1,30 @@
+#' Run a Weighted Crosstab
+#'
+#' Simplifies running a weighted crosstab with [`bhhi_cascade()`] and
+#' [`srvyr::survey_prop()`]. Returns a tibble that can be directly customized or
+#' formatted with [`bhhi_reshape_crosstab()`] and [`bhhi_format_crosstab()`].
+#'
+#' @inheritParams bhhi_gt_crosstab
+#'
+#' @return A tibble with the crosstab results.
+#' @export
+#'
+#' @examples
+#' data("nhanes", package = "survey")
+#'
+#' survey_object <- nhanes |>
+#'   dplyr::rename(gender = RIAGENDR) |>
+#'   dplyr::mutate(
+#'     gender = factor(gender, 1:2, c("Male", "Female")),
+#'     race = factor(race, 1:4, c("Hispanic", "White", "Black", "Other"))
+#'   ) |>
+#'   srvyr::as_survey(weights = WTMEC2YR)
+#'
+#' survey_object |>
+#'   bhhi_crosstab(race, gender)
+#'
+#' survey_object |>
+#'   bhhi_crosstab(race, gender, pct_direction = "row", vartype = "ci")
 bhhi_crosstab <- function(.data,
                           row_var,
                           col_var,

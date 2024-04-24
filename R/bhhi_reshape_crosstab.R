@@ -1,3 +1,26 @@
+#' Pivot a Crosstab to Wide Form
+#'
+#' Pivots a crosstab from [`bhhi_crosstab()`] from long form to wide form.
+#'
+#' @param .data A tibble from [`bhhi_crosstab()`]
+#' @inheritParams bhhi_gt_crosstab
+#'
+#' @export
+#'
+#' @examples
+#' data("nhanes", package = "survey")
+#'
+#' survey_object <- nhanes |>
+#'   dplyr::rename(gender = RIAGENDR) |>
+#'   dplyr::mutate(
+#'     gender = factor(gender, 1:2, c("Male", "Female")),
+#'     race = factor(race, 1:4, c("Hispanic", "White", "Black", "Other"))
+#'   ) |>
+#'   srvyr::as_survey(weights = WTMEC2YR)
+#'
+#' survey_object |>
+#'   bhhi_crosstab(race, gender) |>
+#'   bhhi_reshape_crosstab(race, gender)
 bhhi_reshape_crosstab <- function(.data, row_var, col_var) {
   col_var_string <- rlang::as_string(rlang::ensym(col_var))
 

@@ -20,7 +20,7 @@ reference:
   - title: General tools
   - contents: bhhi_shared_drive
   - title: Survey statistics
-  - contents: bhhi_cascade
+  - contents: [bhhi_crosstab, bhhi_gt_crosstab, bhhi_cascade, bhhi_reshape_crosstab, bhhi_format_crosstab]
   - title: REDCap
   - contents: [starts_with("bhhi_rc"), bhhi_store_token]
   - title: Stata

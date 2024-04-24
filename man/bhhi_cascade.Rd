@@ -14,14 +14,14 @@ bhhi_cascade(.data, ..., .fill = "Overall")
 \item{.fill}{Value to fill in for group summaries. Defaults to 'Overall'.}
 }
 \description{
-Calculates full contingent statistics in the manner of \link[srvyr:cascade]{srvyr::cascade}.
+Calculates full contingent statistics in the manner of \code{\link[srvyr:cascade]{srvyr::cascade()}}.
 }
 \details{
 When calculating a two-way contingency table (a.k.a. crosstab),
-\link[srvyr:cascade]{srvyr::cascade} calculates proportions of the column variable for each level
+\code{\link[srvyr:cascade]{srvyr::cascade()}} calculates proportions of the column variable for each level
 of the row variable, but calculates the proportion of the row variable for
 the overall sample. This makes two-way contingency tables difficult with
-\link[srvyr:cascade]{srvyr::cascade}.
+\code{\link[srvyr:cascade]{srvyr::cascade()}}.
 
 \code{bhhi_cascade()} instead calculates the proportion of the column variable for
 the overall sample, which produces results that are compatible and comparable
@@ -30,7 +30,7 @@ to the results for the levels of the row variable
 \examples{
 data("nhanes", package = "survey")
 
-survey_object = nhanes |>
+survey_object <- nhanes |>
   dplyr::rename(gender = RIAGENDR) |>
   dplyr::mutate(
     gender = factor(gender, 1:2, c("Male", "Female")),

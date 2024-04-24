@@ -1,12 +1,12 @@
 #' Cascade Survey Objects with Full Contingencies
 #'
-#' Calculates full contingent statistics in the manner of [srvyr::cascade].
+#' Calculates full contingent statistics in the manner of [srvyr::cascade()].
 #'
 #' When calculating a two-way contingency table (a.k.a. crosstab),
-#' [srvyr::cascade] calculates proportions of the column variable for each level
+#' [srvyr::cascade()] calculates proportions of the column variable for each level
 #' of the row variable, but calculates the proportion of the row variable for
 #' the overall sample. This makes two-way contingency tables difficult with
-#' [srvyr::cascade].
+#' [srvyr::cascade()].
 #'
 #' `bhhi_cascade()` instead calculates the proportion of the column variable for
 #' the overall sample, which produces results that are compatible and comparable

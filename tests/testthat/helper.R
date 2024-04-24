@@ -49,3 +49,15 @@ expect_equal_bhhi_srvyr <- function(bhhi, srvyr) {
     ignore_attr = TRUE
   )
 }
+
+expect_df_equal <- function(x, filename) {
+  output_file <- withr::local_tempfile(fileext = ".csv")
+
+  write.csv(x, output_file)
+
+  expect_snapshot_file(
+    path = output_file,
+    name = fs::path(filename, ext = "csv"),
+    compare = compare_file_text
+  )
+}
