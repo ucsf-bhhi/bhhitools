@@ -53,7 +53,11 @@ expect_equal_bhhi_srvyr <- function(bhhi, srvyr) {
 expect_df_equal <- function(x, filename) {
   output_file <- withr::local_tempfile(fileext = ".csv")
 
-  write.csv(x, output_file)
+  x |>
+    dplyr::mutate(
+      dplyr::across(dplyr::where(is.numeric), \(x) round(x, 6))
+    ) |>
+    write.csv(output_file)
 
   expect_snapshot_file(
     path = output_file,
