@@ -5,3 +5,11 @@
 .navbar-brand {
   color: #b7e5fd;
 }
+
+.navbar-brand:hover {
+  color: white;
+}
+
+.nav-link:hover {
+  color: white;
+}

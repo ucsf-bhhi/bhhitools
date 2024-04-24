@@ -8,7 +8,7 @@ test_that("auto types, factor conversion works", {
     convert_factors = TRUE,
     col_types = "auto"
   ) |>
-  expect_identical(test_data("rc_read_auto_convert.rds"))
+    expect_identical(test_data("rc_read_auto_convert.rds"))
 })
 
 test_that("auto types, no factor conversion works", {

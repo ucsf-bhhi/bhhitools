@@ -6,7 +6,7 @@
 #' @param open Open the new file in editor.
 #' @export
 bhhi_new_quarto <- function(filename = "bhhi-quarto.qmd", open = TRUE) {
-  filename = check_file_extension(filename)
+  filename <- check_file_extension(filename)
   stop_if_file_exists(filename)
 
   # if the format is not already installed, use quarto use to install it & the template
@@ -28,14 +28,14 @@ bhhi_new_quarto <- function(filename = "bhhi-quarto.qmd", open = TRUE) {
   }
 }
 
-bhhi_quarto_path = function() "_extensions/ucsf-bhhi/bhhi-quarto"
+bhhi_quarto_path <- function() "_extensions/ucsf-bhhi/bhhi-quarto"
 
-check_file_extension = function(filename) {
+check_file_extension <- function(filename) {
   # make sure supplied file name has .qmd extension
   fs::path_ext_set(filename, ".qmd")
 }
 
-stop_if_file_exists = function(filename) {
+stop_if_file_exists <- function(filename) {
   if (!is.null(filename) & fs::file_exists(filename)) {
     cli::cli_abort(
       "File {.file {filename}} exists.",
@@ -44,7 +44,7 @@ stop_if_file_exists = function(filename) {
   }
 }
 
-copy_template = function(filename, open) {
+copy_template <- function(filename, open) {
   fs::file_copy(fs::path(bhhi_quarto_path(), "template.qmd"), filename)
 
   notify_file_created(filename)
@@ -52,18 +52,18 @@ copy_template = function(filename, open) {
   open_file(open, filename)
 }
 
-notify_file_created = function(filename) {
+notify_file_created <- function(filename) {
   cli::cli_inform("{.path {filename}} created.")
 }
 
-open_file = function(open, filename) {
+open_file <- function(open, filename) {
   if (open & interactive()) {
     utils::file.edit(filename)
   }
 }
 
-fetch_quarto_template = function() {
-  cwd = getwd()
+fetch_quarto_template <- function() {
+  cwd <- getwd()
   withr::local_dir(withr::local_tempdir())
 
   add_quarto_format(no_prompt = TRUE, quiet = TRUE)

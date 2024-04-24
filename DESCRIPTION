@@ -10,15 +10,19 @@ Imports:
     cli,
     dplyr,
     fs,
+    glue,
     gt,
     httr2,
     keyring,
+    purrr,
     quarto,
     readr,
     REDCapR (>= 1.1.9005),
     rlang,
     RStata (>= 1.4.0),
     srvyr,
+    stringr,
+    tidyr,
     withr,
     xml2
 Remotes: 
@@ -27,7 +31,7 @@ Remotes:
 Suggests: 
     testthat (>= 3.0.0),
     survey,
-    stringr
+    webshot2
 Config/testthat/edition: 3
 RoxygenNote: 7.3.1
 URL: https://github.com/ucsf-bhhi/bhhitools,

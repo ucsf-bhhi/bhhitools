@@ -36,7 +36,7 @@ bhhi_rc_read <- function(
     export_survey_fields = TRUE,
     verbose = FALSE,
     ...) {
-  parse_args = set_parse_args(col_types, project_token_name)
+  parse_args <- set_parse_args(col_types, project_token_name)
 
   data <- REDCapR::redcap_read_oneshot(
     ...,
@@ -88,7 +88,7 @@ bhhi_rc_convert_binary <- function(data, metadata) {
     )
 }
 
-set_parse_args = function(mode, project_token_name) {
+set_parse_args <- function(mode, project_token_name) {
   if (!(inherits(mode, "col_spec") || mode %in% c("string", "guess", "auto"))) {
     cli::cli_abort(
       message = c(
@@ -98,16 +98,16 @@ set_parse_args = function(mode, project_token_name) {
     )
   }
 
-  parse_args = list(col_types = NULL, guess_type = FALSE)
+  parse_args <- list(col_types = NULL, guess_type = FALSE)
 
   if (inherits(mode, "col_spec")) {
-    parse_args$col_types = mode
+    parse_args$col_types <- mode
   } else if (mode == "string") {
-    parse_args$col_types = readr::cols(.default = readr::col_character())
+    parse_args$col_types <- readr::cols(.default = readr::col_character())
   } else if (mode == "guess") {
-    parse_args$guess_type = TRUE
+    parse_args$guess_type <- TRUE
   } else if (mode == "auto") {
-    parse_args$col_types = REDCapR::redcap_metadata_coltypes(
+    parse_args$col_types <- REDCapR::redcap_metadata_coltypes(
       redcap_uri = redcap_api_url(),
       token = redcap_token(project_token_name),
       print_col_types_to_console = FALSE

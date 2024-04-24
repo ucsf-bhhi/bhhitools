@@ -1,12 +1,12 @@
 #' Cascade Survey Objects with Full Contingencies
 #'
-#' Calculates full contingent statistics in the manner of [srvyr::cascade].
+#' Calculates full contingent statistics in the manner of [srvyr::cascade()].
 #'
 #' When calculating a two-way contingency table (a.k.a. crosstab),
-#' [srvyr::cascade] calculates proportions of the column variable for each level
+#' [srvyr::cascade()] calculates proportions of the column variable for each level
 #' of the row variable, but calculates the proportion of the row variable for
 #' the overall sample. This makes two-way contingency tables difficult with
-#' [srvyr::cascade].
+#' [srvyr::cascade()].
 #'
 #' `bhhi_cascade()` instead calculates the proportion of the column variable for
 #' the overall sample, which produces results that are compatible and comparable
@@ -19,7 +19,7 @@
 #' @examples
 #' data("nhanes", package = "survey")
 #'
-#' survey_object = nhanes |>
+#' survey_object <- nhanes |>
 #'   dplyr::rename(gender = RIAGENDR) |>
 #'   dplyr::mutate(
 #'     gender = factor(gender, 1:2, c("Male", "Female")),
@@ -42,14 +42,14 @@ bhhi_cascade <- function(.data, ..., .fill = "Overall") {
 
 #' @export
 bhhi_cascade.grouped_svy <- function(.data, ..., .fill = "Overall") {
-  group_vars = srvyr::groups(.data)
+  group_vars <- srvyr::groups(.data)
 
-  groupings = generate_groupings(group_vars)
+  groupings <- generate_groupings(group_vars)
 
   srvyr::cascade(.data, ..., .fill = .fill, .groupings = groupings)
 }
 
-generate_groupings = function(group_vars) {
+generate_groupings <- function(group_vars) {
   if (length(group_vars) == 0) {
     return(list(NULL))
   }
@@ -62,11 +62,11 @@ generate_groupings = function(group_vars) {
   } else {
     # else return all the combinations of # of grouping vars to 2 variables
     # filtering for only the combinations containing the last grouping variable
-    combinations = lapply(seq(length(group_vars) - 1, 2), function(i) {
+    combinations <- lapply(seq(length(group_vars) - 1, 2), function(i) {
       utils::combn(group_vars, i, simplify = F)
     })
 
-    filtered_combinations = lapply(combinations, function(x) {
+    filtered_combinations <- lapply(combinations, function(x) {
       Filter(\(y) any(y == group_vars[[length(group_vars)]]), x)
     })
 
