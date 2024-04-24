@@ -25,7 +25,16 @@
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_cascade.html</loc>
   </url>
   <url>
+    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_crosstab.html</loc>
+  </url>
+  <url>
+    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_format_crosstab.html</loc>
+  </url>
+  <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_format_table.html</loc>
+  </url>
+  <url>
+    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_gt_crosstab.html</loc>
   </url>
   <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_new_quarto.html</loc>
@@ -35,6 +44,9 @@
   </url>
   <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_rc_variable_labels.html</loc>
+  </url>
+  <url>
+    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_reshape_crosstab.html</loc>
   </url>
   <url>
     <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_shared_drive.html</loc>
