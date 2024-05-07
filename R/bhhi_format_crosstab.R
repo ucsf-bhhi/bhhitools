@@ -1,9 +1,12 @@
 #' Create Formatted Table  From a Reshaped Crosstab
 #'
-#' Creates a formatted table via the [`gt`] package from a survey crosstab that has been reshaped via [`bhhi_reshape_crosstab()`].
+#' Creates a formatted table via the [`gt`] package from a survey crosstab that
+#' has been reshaped via [`bhhi_reshape_crosstab()`].
 #'
 #' @param .data A tibble from [`bhhi_reshape_crosstab()`]
 #' @inheritParams bhhi_gt_crosstab
+#' @param ci_label Label for the confidence interval column. Defaults to "Conf.
+#'   Interval". Ignored if table doesn't have a confidence interval.
 #'
 #' @export
 #'
@@ -27,7 +30,9 @@
 #' \if{html}{\out{
 #' <img src='man_bhhi_format_crosstab_1.png' class='gt-example-img'>
 #' }}
-bhhi_format_crosstab <- function(.data, decimals = 1) {
+bhhi_format_crosstab <- function(.data,
+                                 decimals = 1,
+                                 ci_label = "Conf. Interval") {
   if (!detect_vartype(.data) & !detect_ci(.data)) {
     .data <- dplyr::rename_with(.data, \(x) stringr::str_remove(x, "_coef"))
   }
@@ -65,10 +70,10 @@ bhhi_format_crosstab <- function(.data, decimals = 1) {
         )
     }
     gt_table <- gt_table |>
-      gt::cols_label(
-        gt::ends_with("_coef") ~ "Percent",
-        gt::ends_with("_low") ~ "Conf. Interval"
-      )
+      gt::cols_label(gt::ends_with("_coef") ~ "Percent") |>
+      # the formula style has issues with lazy eval of the function argument
+      # so use a temp. function that just returns the ci_label value instead
+      gt::cols_label_with(gt::ends_with("_low"), \(x) ci_label)
   }
 
   bhhi_format_table(gt_table)

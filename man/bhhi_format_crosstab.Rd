@@ -4,16 +4,20 @@
 \alias{bhhi_format_crosstab}
 \title{Create Formatted Table  From a Reshaped Crosstab}
 \usage{
-bhhi_format_crosstab(.data, decimals = 1)
+bhhi_format_crosstab(.data, decimals = 1, ci_label = "Conf. Interval")
 }
 \arguments{
 \item{.data}{A tibble from \code{\link[=bhhi_reshape_crosstab]{bhhi_reshape_crosstab()}}}
 
 \item{decimals}{An integer specifing the number of decimal places in the
 results. Defaults to 1.}
+
+\item{ci_label}{Label for the confidence interval column. Defaults to "Conf.
+Interval". Ignored if table doesn't have a confidence interval.}
 }
 \description{
-Creates a formatted table via the \code{\link{gt}} package from a survey crosstab that has been reshaped via \code{\link[=bhhi_reshape_crosstab]{bhhi_reshape_crosstab()}}.
+Creates a formatted table via the \code{\link{gt}} package from a survey crosstab that
+has been reshaped via \code{\link[=bhhi_reshape_crosstab]{bhhi_reshape_crosstab()}}.
 }
 \section{Examples}{
 
