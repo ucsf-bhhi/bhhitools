@@ -1,0 +1,98 @@
+---
+title: "Survey Crosstabs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Survey Crosstabs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=FALSE}
+library(bhhitools)
+library(srvyr)
+library(survey)
+library(dplyr)
+
+data(nhanes)
+```
+
+```{r}
+survey_object = nhanes |> 
+  rename(gender = RIAGENDR, hi_chol = HI_CHOL) |>
+    mutate(
+      gender = factor(gender, 1:2, c("Male", "Female")),
+      race = factor(race, 1:4, c("Hispanic", "White", "Black", "Other")),
+      hi_chol = if_else(is.na(hi_chol), 0, hi_chol),
+      hi_chol = factor(hi_chol, 0:1, c("No", "Yes"))
+    ) |>
+    as_survey(weights = WTMEC2YR)
+```
+
+## Auto-Formatted Output
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(race, gender)
+```
+
+### Measures of Variability
+
+#### Standard Errors
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(race, gender, vartype = "se")
+```
+
+#### Confidence Intervals
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(race, gender, vartype = "ci")
+```
+
+### Row and Column Variables
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(gender, race)
+```
+
+
+### Row or Column Percentages
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(race, gender, pct_direction = "row")
+```
+
+### Decimal Places
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(race, gender, decimals = 2)
+```
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(race, gender, pct_direction = "row", decimals = 0)
+```
+
+### Custom Formatting with `gt`
+
+```{r}
+library(gt)
+
+survey_object |> 
+  bhhi_gt_crosstab(race, gender) |> 
+  tab_header(title = "NHANES Data", subtitle = "Race by Gender") |> 
+  tab_footnote("Columns percentages shown.")
+```
+
