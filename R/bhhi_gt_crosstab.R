@@ -72,5 +72,9 @@ bhhi_gt_crosstab <- function(.data,
     na.rm = na.rm
   ) |>
     bhhi_reshape_crosstab({{ row_var }}, {{ col_var }}) |>
-    bhhi_format_crosstab(decimals = decimals)
+    bhhi_format_crosstab(decimals = decimals, ci_label = build_ci_label(level))
+}
+
+build_ci_label = function(level) {
+  glue::glue("{format(level * 100)}% Conf. Interval")
 }
