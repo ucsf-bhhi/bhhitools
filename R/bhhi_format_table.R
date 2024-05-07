@@ -5,18 +5,24 @@
 #' Currently sets table to full width and left aligns text in the table stub.
 #'
 #' @param table A `gt:gt` table object
-#' @param full_width Table will fill the entire width of its container. Default is true.
+#' @param full_width Table will fill the entire width of its container. Default
+#'   is true.
 #' @param left_align_stub Text in table stub is left-aligned. Default is true.
+#' @param vertical_align_column_headers Text in column labels is bottom aligned
+#'   vertically. Default is true.
 #'
 #' @return The formatted table object.
 #' @export
 #'
 #' @examplesIf interactive()
-#' mtcars |>
+#'  mtcars |>
 #'   dplyr::as_tibble(rownames = "car") |>
 #'   gt::gt(rowname_col = "car") |>
 #'   bhhi_format_table()
-bhhi_format_table <- function(table, full_width = TRUE, left_align_stub = TRUE) {
+bhhi_format_table <- function(table,
+                              full_width = TRUE,
+                              left_align_stub = TRUE,
+                              vertical_align_column_headers = TRUE) {
   if (!inherits(table, "gt_tbl")) {
     cli::cli_abort(
       message = c(
@@ -32,6 +38,14 @@ bhhi_format_table <- function(table, full_width = TRUE, left_align_stub = TRUE) 
 
   if (left_align_stub) {
     table <- gt::tab_style(table, gt::cell_text(align = "left"), gt::cells_stub())
+  }
+
+  if (vertical_align_column_headers) {
+    table <- gt::tab_style(
+      table,
+      gt::cell_text(v_align = "bottom"),
+      list(gt::cells_column_labels(), gt::cells_column_spanners())
+    )
   }
 
   table

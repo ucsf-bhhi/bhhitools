@@ -4,14 +4,23 @@
 \alias{bhhi_format_table}
 \title{Format Tables for Output}
 \usage{
-bhhi_format_table(table, full_width = TRUE, left_align_stub = TRUE)
+bhhi_format_table(
+  table,
+  full_width = TRUE,
+  left_align_stub = TRUE,
+  vertical_align_column_headers = TRUE
+)
 }
 \arguments{
 \item{table}{A \code{gt:gt} table object}
 
-\item{full_width}{Table will fill the entire width of its container. Default is true.}
+\item{full_width}{Table will fill the entire width of its container. Default
+is true.}
 
 \item{left_align_stub}{Text in table stub is left-aligned. Default is true.}
+
+\item{vertical_align_column_headers}{Text in column labels is bottom aligned
+vertically. Default is true.}
 }
 \value{
 The formatted table object.
@@ -24,7 +33,7 @@ Currently sets table to full width and left aligns text in the table stub.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-mtcars |>
+ mtcars |>
   dplyr::as_tibble(rownames = "car") |>
   gt::gt(rowname_col = "car") |>
   bhhi_format_table()
