@@ -10,39 +10,66 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
-```{r setup, include=FALSE}
+`bhhitools` has a set of functions to simplify running crosstabs on survey data. The `{srvyr}` package, frequently used for tidyverse style survey data analysis, computes two-way crosstabs in a way that makes it challenging to run a crosstab that also has row or column percentages for the overall population.
+
+`bhhitools` includes the function `bhhi_gt_crosstab()` which runs the crosstab and produced an auto-formatted output table. `bhhitools` also has a set of helper functions for each step of running and formatting crosstabs if you'd like more manual control.
+
+This article walks through both the all-in-one `bhhi_gt_crosstab()` and the lower-level functions using the `nhanes` example dataset from the `{survey}` package. These functions will work on any survey data object created with either the `{srvyr}` or `{survey}` packages.
+
+## Survey Object Setup
+
+First, we'll create our survey object from the `nhanes` dataset with the `srvyr::as_survey()` function and recode some categorical variables as factors to make the output easier to understand.
+
+```{r}
 library(bhhitools)
 library(srvyr)
 library(survey)
 library(dplyr)
 
 data(nhanes)
-```
 
-```{r}
 survey_object = nhanes |> 
   rename(gender = RIAGENDR, hi_chol = HI_CHOL) |>
     mutate(
       gender = factor(gender, 1:2, c("Male", "Female")),
-      race = factor(race, 1:4, c("Hispanic", "White", "Black", "Other")),
-      hi_chol = if_else(is.na(hi_chol), 0, hi_chol),
-      hi_chol = factor(hi_chol, 0:1, c("No", "Yes"))
+      race = factor(race, 1:4, c("Hispanic", "White", "Black", "Other"))
     ) |>
     as_survey(weights = WTMEC2YR)
 ```
 
 ## Auto-Formatted Output
 
+In the simplest case, `bhhi_gt_crosstab()` takes the row variable and column variable and produces a formatted table with column percentages:
+
 ```{r}
 survey_object |> 
   bhhi_gt_crosstab(race, gender)
 ```
 
+Changing the order the variables are specified flips the row and column positions:
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(gender, race)
+```
+
+
 ### Measures of Variability
+
+By default `bhhi_gt_crosstab()` does not show measures of variability, but those can be added via the `vartype` argument. `bhhi_gt_crosstab()` supports all of the measures that `srvyr::survey_prop()` can calculate:
+
+ * `vartype = "se"` for standard errors
+ * `vartype = "ci"` for confidence intervals
+ * `vartype = "var"` for variance
+ * `vartype = "cv"` for coefficient of variation
+ 
+For example:
 
 #### Standard Errors
 
@@ -58,22 +85,41 @@ survey_object |>
   bhhi_gt_crosstab(race, gender, vartype = "ci")
 ```
 
-### Row and Column Variables
+By default `bhhi_gt_crosstab()` creates 95% confidence intervals, but other levels can be requested with the `level` argument:
 
 ```{r}
 survey_object |> 
-  bhhi_gt_crosstab(gender, race)
+  bhhi_gt_crosstab(race, gender, vartype = "ci", level = 0.9)
 ```
 
+#### Multiple Measures of Variability
+
+`bhhi_gt_crosstab()` can also provide multiple measures of variability:
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(race, gender, vartype = c("se", "ci"))
+```
 
 ### Row or Column Percentages
+
+By default, `bhhi_gt_crosstab()` calculates column percentages, but row percentages can be requested with the `pct_direction` argument:
 
 ```{r}
 survey_object |> 
   bhhi_gt_crosstab(race, gender, pct_direction = "row")
 ```
 
+Standard errors, confidence intervals, etc. can still be requested with row percentages:
+
+```{r}
+survey_object |> 
+  bhhi_gt_crosstab(race, gender, pct_direction = "row", vartype = "se")
+```
+
 ### Decimal Places
+
+`bhhi_gt_crosstab()` shows 1 decimal place by default, but more or fewer places can be requested with the `decimals` argument:
 
 ```{r}
 survey_object |> 
@@ -87,6 +133,10 @@ survey_object |>
 
 ### Custom Formatting with `gt`
 
+`bhhi_gt_crosstab()` creates a `{gt}` table output, so the output can be further customized with `{gt}` functions.
+
+For example, you can add a title and subtitle to the table header with `gt::tab_header()` and a footnote with `gt::tab_footnote()`:
+
 ```{r}
 library(gt)
 
@@ -96,3 +146,81 @@ survey_object |>
   tab_footnote("Columns percentages shown.")
 ```
 
+## Manual Crosstab Functions
+
+`bhhi_gt_crosstab()` uses these functions to automatically create formatted output, but the helper functions are available for greater control and customization.
+
+### `bhhi_cascade()`
+
+`bhhi_cascade()` is a drop-in replacement for `srvyr::cascade()` which calculates the full set of proportions for the overall population and supplies `"Overall"` as the default value for the `.fill` argument:
+
+```{r}
+survey_object |>
+  group_by(gender, race) |>
+  bhhi_cascade(survey_prop())
+```
+
+Where `srvyr::cascade()` calculates the proportions of the grouping variable in the overall proportion:
+
+```{r}
+survey_object |>
+  group_by(gender, race) |>
+  cascade(survey_prop(), .fill = "Overall")
+```
+
+Like `srvyr::cascade()`, `bhhi_cascade()` can calculate multiple statistics:
+
+```{r}
+survey_object |>
+  group_by(gender, race) |>
+  bhhi_cascade(
+    n = n(),
+    proportion = survey_prop(),
+    hi_chol_mean = survey_mean(hi_chol, na.rm = TRUE)
+  )
+```
+
+### `bhhi_crosstab()`
+
+`bhhi_crosstab()` simplifies manually creating a crosstab by removing the need to use `group_by()` and `bhhi_cascade()`. It still returns the results in long form as a tibble.
+
+```{r}
+survey_object |>
+  bhhi_crosstab(race, gender)
+```
+
+`bhhi_crosstab()` can also produce row or column percentages with out having to change the variable order. It also supports the full set of measures of variability.
+
+```{r}
+survey_object |>
+  bhhi_crosstab(race, gender, pct_direction = "row", vartype = "ci")
+```
+
+### `bhhi_reshape_crosstab()`
+
+`bhhi_reshape_crosstab()` is a helper function that transform the long form data into a more standard table form.
+
+```{r}
+survey_object |>
+  bhhi_crosstab(race, gender) |>
+  bhhi_reshape_crosstab(race, gender)
+```
+
+You can place either variable along the rows or columns of the table:
+
+```{r}
+survey_object |>
+  bhhi_crosstab(race, gender) |>
+  bhhi_reshape_crosstab(gender, race)
+```
+
+### `bhhi_format_crosstab()`
+
+`bhhi_format_crosstab()` takes a table produced by `bhhi_reshape_crosstab()` and produces a formatted output table via the `{gt}` package. `bhhi_format_crosstab()` expects the naming conventions from `bhhi_reshape_crosstab()`, so it's unlikely to work with tables produced by other means.
+
+```{r}
+survey_object |>
+  bhhi_crosstab(race, gender) |>
+  bhhi_reshape_crosstab(race, gender) |>
+  bhhi_format_crosstab()
+```
