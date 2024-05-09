@@ -49,17 +49,11 @@ copy_template <- function(filename, open) {
 
   notify_file_created(filename)
 
-  open_file(open, filename)
+  usethis::edit_file(filename, open = open)
 }
 
 notify_file_created <- function(filename) {
   cli::cli_inform("{.path {filename}} created.")
-}
-
-open_file <- function(open, filename) {
-  if (open & interactive()) {
-    utils::file.edit(filename)
-  }
 }
 
 fetch_quarto_template <- function() {
