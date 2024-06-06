@@ -13,6 +13,7 @@ bhhi_crosstab(
   vartype = c("se", "ci", "var", "cv"),
   level = 0.95,
   proportion = TRUE,
+  convert_labelled = TRUE,
   na.rm = FALSE
 )
 }
@@ -38,6 +39,9 @@ the confidence level}
 \item{proportion}{Use methods to calculate the proportion that may have more accurate
 confidence intervals near 0 and 1. Based on
 \code{\link[survey]{svyciprop}}.}
+
+\item{convert_labelled}{If either \code{row_var} or \code{col_var} is
+\code{\link[haven:labelled]{haven::labelled}}, automatically convert to factor. Defaults to TRUE.}
 
 \item{na.rm}{Drop missing values. Defaults to FALSE.}
 }
@@ -65,4 +69,12 @@ survey_object |>
 
 survey_object |>
   bhhi_crosstab(race, gender, pct_direction = "row", vartype = "ci")
+
+survey_object_labelled <- survey_object |>
+  srvyr::mutate(
+    srvyr::across(c(gender, race), labelled::to_labelled)
+  )
+
+survey_object_labelled |>
+  bhhi_gt_crosstab(race, gender)
 }

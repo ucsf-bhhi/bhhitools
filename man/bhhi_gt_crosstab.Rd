@@ -14,6 +14,7 @@ bhhi_gt_crosstab(
   level = 0.95,
   proportion = TRUE,
   decimals = 1,
+  convert_labelled = TRUE,
   na.rm = FALSE
 )
 }
@@ -43,6 +44,9 @@ confidence intervals near 0 and 1. Based on
 \item{decimals}{An integer specifing the number of decimal places in the
 results. Defaults to 1.}
 
+\item{convert_labelled}{If either \code{row_var} or \code{col_var} is
+\code{\link[haven:labelled]{haven::labelled}}, automatically convert to factor. Defaults to TRUE.}
+
 \item{na.rm}{Drop missing values. Defaults to FALSE.}
 }
 \description{
@@ -64,6 +68,18 @@ survey_object <- nhanes |>
   srvyr::as_survey(weights = WTMEC2YR)
 
 survey_object |>
+  bhhi_gt_crosstab(race, gender)
+
+ survey_object_labelled <- nhanes |>
+  dplyr::rename(gender = RIAGENDR) |>
+  dplyr::mutate(
+    gender = factor(gender, 1:2, c("Male", "Female")),
+    race = factor(race, 1:4, c("Hispanic", "White", "Black", "Other")),
+    dplyr::across(c(gender, race), labelled::to_labelled)
+  ) |>
+  srvyr::as_survey(weights = WTMEC2YR)
+
+  survey_object_labelled |>
   bhhi_gt_crosstab(race, gender)
 }\if{html}{\out{</div>}}
 

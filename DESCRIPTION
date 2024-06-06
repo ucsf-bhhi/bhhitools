@@ -12,6 +12,7 @@ Imports:
     fs,
     glue,
     gt,
+    haven,
     httr2,
     keyring,
     purrr,
@@ -29,6 +30,7 @@ Remotes:
     eveyp/RStata,
     OuhscBbmc/REDCapR
 Suggests: 
+    labelled,
     testthat (>= 3.0.0),
     survey,
     webshot2

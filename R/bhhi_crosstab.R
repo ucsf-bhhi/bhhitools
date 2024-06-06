@@ -25,6 +25,14 @@
 #'
 #' survey_object |>
 #'   bhhi_crosstab(race, gender, pct_direction = "row", vartype = "ci")
+#'
+#' survey_object_labelled <- survey_object |>
+#'   srvyr::mutate(
+#'     srvyr::across(c(gender, race), labelled::to_labelled)
+#'   )
+#'
+#' survey_object_labelled |>
+#'   bhhi_gt_crosstab(race, gender)
 bhhi_crosstab <- function(.data,
                           row_var,
                           col_var,
@@ -33,6 +41,7 @@ bhhi_crosstab <- function(.data,
                           vartype = c("se", "ci", "var", "cv"),
                           level = 0.95,
                           proportion = TRUE,
+                          convert_labelled = TRUE,
                           na.rm = FALSE) {
   groups <- switch(pct_direction,
     "row" = rlang::ensyms(row_var, col_var),
@@ -50,6 +59,16 @@ bhhi_crosstab <- function(.data,
   }
 
   if (missing(vartype)) vartype <- NULL
+
+  if (convert_labelled) {
+    .data <- .data |>
+      srvyr::mutate(
+        srvyr::across(
+          dplyr::where(haven::is.labelled) & c({{ row_var }}, {{ col_var }}),
+          haven::as_factor
+        )
+      )
+  }
 
   .data |>
     srvyr::group_by(!!!groups) |>

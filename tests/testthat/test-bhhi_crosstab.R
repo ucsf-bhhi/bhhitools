@@ -181,3 +181,21 @@ test_that("bhhi_crosstab proportion false works", {
 
   expect_equal_bhhi_srvyr(bhhi_result, srvyr_result)
 })
+
+test_that("convert labelled works", {
+  auto_converted_result <- create_test_svy_tbl(with_labelled = TRUE) |>
+    bhhi_crosstab(race, gender)
+
+  manual_converted_result <- create_test_svy_tbl(with_labelled = TRUE) |>
+    srvyr::mutate(srvyr::across(c(race, gender), haven::as_factor)) |>
+    bhhi_crosstab(race, gender)
+
+  expect_equal(auto_converted_result, manual_converted_result)
+})
+
+test_that("convert labelled errors appropriately", {
+  expect_error(
+    create_test_svy_tbl(with_labelled = TRUE) |>
+      bhhi_crosstab(race, gender, convert_labelled = FALSE)
+  )
+})

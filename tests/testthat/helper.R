@@ -13,12 +13,12 @@ mock_add_quarto_format <- function() {
   )
 }
 
-create_test_svy_tbl <- function() {
+create_test_svy_tbl <- function(with_labelled = FALSE) {
   # specify the current (ie. inside the function environment) so the dataset
   # isn't loaded into the global environment and doesn't persits after the
   # function exits
   data("nhanes", package = "survey", envir = rlang::current_env())
-  nhanes |>
+  test_data <- nhanes |>
     dplyr::rename(gender = RIAGENDR, hi_chol = HI_CHOL) |>
     dplyr::mutate(
       gender = factor(gender, 1:2, c("Male", "Female")),
@@ -27,6 +27,15 @@ create_test_svy_tbl <- function() {
       hi_chol = factor(hi_chol, 0:1, c("No", "Yes"))
     ) |>
     srvyr::as_survey(weights = WTMEC2YR)
+
+  if (with_labelled) {
+    test_data <- test_data |>
+      srvyr::mutate(
+        srvyr::across(dplyr::where(is.factor), labelled::to_labelled)
+      )
+  }
+
+  test_data
 }
 
 expect_gt_output <- function(x, filename) {
