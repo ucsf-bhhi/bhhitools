@@ -14,7 +14,7 @@ output via the gt table package."><meta property="og:image" content="https://ucs
     
     <a class="navbar-brand me-2" href="../index.html">bhhitools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,6 +67,7 @@ output via the <code>gt</code> table package.</p>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  proportion <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  decimals <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  convert_labelled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -116,6 +117,11 @@ confidence intervals near 0 and 1. Based on
 results. Defaults to 1.</p></dd>
 
 
+<dt>convert_labelled</dt>
+<dd><p>If either <code>row_var</code> or <code>col_var</code> is
+<code><a href="https://haven.tidyverse.org/reference/labelled.html" class="external-link">haven::labelled</a></code>, automatically convert to factor. Defaults to TRUE.</p></dd>
+
+
 <dt>na.rm</dt>
 <dd><p>Drop missing values. Defaults to FALSE.</p></dd>
 
@@ -136,6 +142,18 @@ results. Defaults to 1.</p></dd>
 <span>  <span class="fu">srvyr</span><span class="fu">::</span><span class="fu"><a href="http://gdfe.co/srvyr/reference/as_survey.html" class="external-link">as_survey</a></span><span class="op">(</span>weights <span class="op">=</span> <span class="va">WTMEC2YR</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">survey_object</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/bhhi_gt_crosstab.html">bhhi_gt_crosstab</a></span><span class="op">(</span><span class="va">race</span>, <span class="va">gender</span><span class="op">)</span></span>
+<span></span>
+<span> <span class="va">survey_object_labelled</span> <span class="op">&lt;-</span> <span class="va">nhanes</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="va">RIAGENDR</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">gender</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    race <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">race</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Hispanic"</span>, <span class="st">"White"</span>, <span class="st">"Black"</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">race</span><span class="op">)</span>, <span class="fu">labelled</span><span class="fu">::</span><span class="va"><a href="https://larmarange.github.io/labelled/reference/to_labelled.html" class="external-link">to_labelled</a></span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">srvyr</span><span class="fu">::</span><span class="fu"><a href="http://gdfe.co/srvyr/reference/as_survey.html" class="external-link">as_survey</a></span><span class="op">(</span>weights <span class="op">=</span> <span class="va">WTMEC2YR</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">survey_object_labelled</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/bhhi_gt_crosstab.html">bhhi_gt_crosstab</a></span><span class="op">(</span><span class="va">race</span>, <span class="va">gender</span><span class="op">)</span></span></code></pre><p></p></div>
 <p><img src="man_bhhi_gt_crosstab_1.png" class="gt-example-img"></p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">survey_object</span> <span class="op">|&gt;</span></span>

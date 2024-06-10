@@ -14,7 +14,7 @@ formatted with bhhi_reshape_crosstab() and bhhi_format_crosstab()."><meta proper
     
     <a class="navbar-brand me-2" href="../index.html">bhhitools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,6 +66,7 @@ formatted with <code><a href="bhhi_reshape_crosstab.html">bhhi_reshape_crosstab(
 <span>  vartype <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"se"</span>, <span class="st">"ci"</span>, <span class="st">"var"</span>, <span class="st">"cv"</span><span class="op">)</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  proportion <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  convert_labelled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -108,6 +109,11 @@ the confidence level</p></dd>
 <dd><p>Use methods to calculate the proportion that may have more accurate
 confidence intervals near 0 and 1. Based on
 <code><a href="https://rdrr.io/pkg/survey/man/svyciprop.html" class="external-link">svyciprop</a></code>.</p></dd>
+
+
+<dt>convert_labelled</dt>
+<dd><p>If either <code>row_var</code> or <code>col_var</code> is
+<code><a href="https://haven.tidyverse.org/reference/labelled.html" class="external-link">haven::labelled</a></code>, automatically convert to factor. Defaults to TRUE.</p></dd>
 
 
 <dt>na.rm</dt>
@@ -168,6 +174,485 @@ confidence intervals near 0 and 1. Based on
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Other    Female 0.542  0.489  0.594</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Overall  Male   0.488  0.475  0.501</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Overall  Female 0.512  0.499  0.525</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">survey_object_labelled</span> <span class="op">&lt;-</span> <span class="va">survey_object</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">srvyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu">srvyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">race</span><span class="op">)</span>, <span class="fu">labelled</span><span class="fu">::</span><span class="va"><a href="https://larmarange.github.io/labelled/reference/to_labelled.html" class="external-link">to_labelled</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">survey_object_labelled</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="bhhi_gt_crosstab.html">bhhi_gt_crosstab</a></span><span class="op">(</span><span class="va">race</span>, <span class="va">gender</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;style&gt;#mwlefoodfi table {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -webkit-font-smoothing: antialiased;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -moz-osx-font-smoothing: grayscale;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi thead, #mwlefoodfi tbody, #mwlefoodfi tfoot, #mwlefoodfi tr, #mwlefoodfi td, #mwlefoodfi th {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi p {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   margin: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_table {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   display: table;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-collapse: collapse;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   line-height: normal;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   margin-left: auto;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   margin-right: auto;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 16px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-style: normal;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   width: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #A8A8A8;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #A8A8A8;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_caption {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_title {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 125%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_subtitle {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 85%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 3px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_heading {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: center;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_bottom_border {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_col_headings {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_col_heading {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: bottom;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 6px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   overflow-x: hidden;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_column_spanner_outer {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_column_spanner_outer:first-child {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_column_spanner_outer:last-child {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_column_spanner {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: bottom;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   overflow-x: hidden;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   display: inline-block;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   width: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_spanner_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: hidden;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_group_heading {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: middle;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: left;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_empty_group_heading {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding: 0.5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: middle;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_from_md &gt; :first-child {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   margin-top: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_from_md &gt; :last-child {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   margin-bottom: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   margin: 10px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: middle;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   overflow-x: hidden;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_stub {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_stub_row_group {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: top;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_row_group_first td {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_row_group_first th {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_first_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_first_summary_row.thick {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_last_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_grand_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_first_grand_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: double;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 6px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_last_grand_summary_row_top {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: double;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 6px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_striped {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: rgba(128, 128, 128, 0.05);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_table_body {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_footnotes {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_footnote {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   margin: 0px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 90%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_sourcenotes {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_sourcenote {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 90%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_left {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: left;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_center {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: center;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_right {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: right;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-variant-numeric: tabular-nums;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_font_normal {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_font_bold {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: bold;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_font_italic {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-style: italic;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_super {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 65%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_footnote_marks {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 75%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: 0.4em;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   position: initial;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_asterisk {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: 0;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_indent_1 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 5px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_indent_2 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 10px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_indent_3 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 15px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_indent_4 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 20px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #mwlefoodfi .gt_indent_5 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 25px;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/style&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_col_headings"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""&gt;&lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Male"&gt;Male&lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Female"&gt;Female&lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Overall"&gt;Overall&lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tbody class="gt_table_body"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="text-align: left;"&gt;Hispanic&lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_1 Male" class="gt_row gt_right"&gt;15.8%&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_1 Female" class="gt_row gt_right"&gt;14.3%&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_1 Overall" class="gt_row gt_right"&gt;15.1%&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="text-align: left;"&gt;White&lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_2 Male" class="gt_row gt_right"&gt;66.2%&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_2 Female" class="gt_row gt_right"&gt;65.3%&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_2 Overall" class="gt_row gt_right"&gt;65.7%&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="text-align: left;"&gt;Black&lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_3 Male" class="gt_row gt_right"&gt;11.1%&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_3 Female" class="gt_row gt_right"&gt;12.7%&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_3 Overall" class="gt_row gt_right"&gt;11.9%&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="text-align: left;"&gt;Other&lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_4 Male" class="gt_row gt_right"&gt;6.8%&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_4 Female" class="gt_row gt_right"&gt;7.7%&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="stub_1_4 Overall" class="gt_row gt_right"&gt;7.3%&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/div&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
