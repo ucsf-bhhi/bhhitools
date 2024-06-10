@@ -24,6 +24,7 @@ Imports:
     srvyr,
     stringr,
     tidyr,
+    usethis,
     withr,
     xml2
 Remotes: 
