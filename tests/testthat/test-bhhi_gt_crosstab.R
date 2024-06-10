@@ -21,3 +21,17 @@ test_that("bhhi_gt_crosstab with 0 decimal works", {
     bhhi_gt_crosstab(race, gender, decimals = 0, vartype = "ci") |>
     expect_gt_output("bhhi_gt_crosstab_0_decimal")
 })
+
+test_that("convert labelled works", {
+  create_test_svy_tbl(with_labelled = TRUE) |>
+    bhhi_gt_crosstab(race, gender) |>
+    expect_gt_output("bhhi_gt_crosstab_convert_labelled")
+})
+
+test_that("convert labelled errors appropriately", {
+  expect_error(
+    create_test_svy_tbl(with_labelled = TRUE) |>
+      bhhi_crosstab(race, gender, convert_labelled = FALSE)
+  )
+})
+

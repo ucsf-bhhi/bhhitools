@@ -1,7 +1,7 @@
 Package: bhhitools
 Type: Package
 Title: Tools For BHHI R Users
-Version: 0.5.0
+Version: 0.6.0
 Authors@R: person("Eve", "Perry", email = "eve.perry@ucsf.edu", role = c("aut", "cre"))
 Description: A collection of functions to make R work at BHHI easier.
 Encoding: UTF-8
@@ -12,6 +12,7 @@ Imports:
     fs,
     glue,
     gt,
+    haven,
     httr2,
     keyring,
     purrr,
@@ -23,12 +24,14 @@ Imports:
     srvyr,
     stringr,
     tidyr,
+    usethis,
     withr,
     xml2
 Remotes: 
     eveyp/RStata,
     OuhscBbmc/REDCapR
 Suggests: 
+    labelled,
     testthat (>= 3.0.0),
     survey,
     webshot2
