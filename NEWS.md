@@ -1,3 +1,9 @@
+# bhhitools 0.6.0
+
+* Auto-convert variables with Stata value labels from  [haven::labelled] to factors in `bhhi_crosstab()` and `bhhi_gt_crosstab()`.
+
+* Fix bug in auto-opening .qmd file with `bhhi_new_quarto()`.
+
 # bhhitools 0.5.0
 
 * Adds tools for making survey crosstabs easier: `bhhi_crosstab()`, `bhhi_gt_crosstab()`, `bhhi_cascade()`, `bhhi_reshape_crosstab()`, & `bhhi_format_crosstab()`.
