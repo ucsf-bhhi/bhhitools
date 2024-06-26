@@ -1,3 +1,7 @@
+# bhhitools 0.6.1
+
+* Fixed bug with `bhhi_gt_crosstab()` and `bhhi_format_crosstab()` when the row variable name ended with "_" and 2-4 other characters.
+
 # bhhitools 0.6.0
 
 * Auto-convert variables with Stata value labels from  [haven::labelled] to factors in `bhhi_crosstab()` and `bhhi_gt_crosstab()`.

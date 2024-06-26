@@ -88,7 +88,11 @@ detect_ci <- function(.data) {
 }
 
 get_column_name_stems <- function(.data) {
-  x <- stringr::str_extract(names(.data), "(.*)_.{2,4}$", group = 1)
+  column_names = names(.data)
+  # first column is the row var so remove it
+  column_names = column_names[2:length(column_names)]
+
+  x <- stringr::str_extract(column_names, "(.*)_.{2,4}$", group = 1)
 
   unique(x[!is.na(x)])
 }
