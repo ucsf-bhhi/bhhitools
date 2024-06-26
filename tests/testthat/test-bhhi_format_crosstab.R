@@ -16,6 +16,16 @@ test_that("bhhi_format_crosstab with ci works", {
     expect_gt_output("bhhi_format_crosstab_ci")
 })
 
+test_that("bhhi_format_crosstab with ci & 2-4 letter suffix name works", {
+  create_test_svy_tbl() |>
+    srvyr::rename(race_cat = race) |>
+    srvyr::group_by(race_cat, gender) |>
+    bhhi_cascade(srvyr::survey_prop(vartype = "ci", proportion = TRUE)) |>
+    bhhi_reshape_crosstab(race_cat, gender) |>
+    bhhi_format_crosstab() |>
+    expect_gt_output("bhhi_format_crosstab_ci")
+})
+
 test_that("bhhi_format_crosstab with no vartype works", {
   create_test_svy_tbl() |>
     srvyr::group_by(race, gender) |>
