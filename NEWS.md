@@ -1,3 +1,7 @@
+# bhhitools 0.6.2
+
+* Fixed bug with `bhhi_cascade()` when grouping by 3+ variables.
+
 # bhhitools 0.6.1
 
 * Fixed bug with `bhhi_gt_crosstab()` and `bhhi_format_crosstab()` when the row variable name ended with "_" and 2-4 other characters.

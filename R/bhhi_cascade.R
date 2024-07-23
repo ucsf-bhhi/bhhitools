@@ -49,6 +49,7 @@ bhhi_cascade.grouped_svy <- function(.data, ..., .fill = "Overall") {
   srvyr::cascade(.data, ..., .fill = .fill, .groupings = groupings)
 }
 
+#' @importFrom rlang !!!
 generate_groupings <- function(group_vars) {
   if (length(group_vars) == 0) {
     return(list(NULL))
@@ -68,10 +69,15 @@ generate_groupings <- function(group_vars) {
 
     filtered_combinations <- lapply(combinations, function(x) {
       Filter(\(y) any(y == group_vars[[length(group_vars)]]), x)
-    })
+    }) |>
+      purrr::flatten()
 
     return(
-      list(group_vars, filtered_combinations, list(group_vars[[length(group_vars)]]))
+      rlang::list2(
+        group_vars,
+        !!!filtered_combinations,
+        list(group_vars[[length(group_vars)]])
+      )
     )
   }
 }

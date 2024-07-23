@@ -18,6 +18,43 @@ test_that("two-way proportion works", {
   expect_equal(bhhi_version, srvyr_version, ignore_attr = TRUE)
 })
 
+test_that("three-way proportion works", {
+  nhanes <- create_test_svy_tbl()
+
+  bhhi_version <- nhanes |>
+    srvyr::group_by(hi_chol, gender, race) |>
+    bhhi_cascade(srvyr::survey_prop()) |>
+    dplyr::ungroup() |>
+    dplyr::mutate(dplyr::across(dplyr::where(is.factor), as.character)) |>
+    dplyr::arrange(hi_chol, gender, race)
+
+  srvyr_version <- dplyr::bind_rows(
+    nhanes |>
+      srvyr::group_by(hi_chol,gender, race) |>
+      srvyr::summarise(srvyr::survey_prop()),
+    nhanes |>
+      srvyr::group_by(hi_chol, race) |>
+      srvyr::summarise(srvyr::survey_prop()),
+    nhanes |>
+      srvyr::group_by(gender, race) |>
+      srvyr::summarise(srvyr::survey_prop()),
+    nhanes |>
+      srvyr::group_by(race) |>
+      srvyr::summarise(srvyr::survey_prop())
+  ) |>
+    dplyr::ungroup() |>
+    dplyr::mutate(
+      dplyr::across(
+        c(gender, hi_chol, race),
+        \(x) factor(dplyr::if_else(is.na(x), "Overall", x))
+      ),
+      dplyr::across(dplyr::where(is.factor), as.character)
+    ) |>
+    dplyr::arrange(hi_chol, gender, race)
+
+  expect_equal(bhhi_version, srvyr_version, ignore_attr = TRUE)
+})
+
 test_that("two-way proportion with n works", {
   nhanes <- create_test_svy_tbl()
 
