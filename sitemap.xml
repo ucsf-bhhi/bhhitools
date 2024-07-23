@@ -1,81 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/404.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_add_quarto.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_cascade.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_crosstab.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_format_crosstab.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_format_table.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_gt_crosstab.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_new_quarto.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_rc_read.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_rc_variable_labels.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_reshape_crosstab.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_shared_drive.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_stata_do.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_stata_prep.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_store_token.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhitools.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/get_stata_path.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/get_stata_version.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/redcap_api_url.html</loc>
-  </url>
-  <url>
-    <loc>https://ucsf-bhhi.github.io/bhhitools/reference/redcap_token.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/404.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/LICENSE-text.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/LICENSE.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/authors.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/index.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/news/index.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_add_quarto.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_cascade.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_crosstab.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_format_crosstab.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_format_table.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_gt_crosstab.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_new_quarto.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_rc_read.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_rc_variable_labels.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_reshape_crosstab.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_shared_drive.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_stata_do.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_stata_prep.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhi_store_token.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/bhhitools.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/get_stata_path.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/get_stata_version.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/index.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/redcap_api_url.html</loc></url>
+<url><loc>https://ucsf-bhhi.github.io/bhhitools/reference/redcap_token.html</loc></url>
 </urlset>
+
