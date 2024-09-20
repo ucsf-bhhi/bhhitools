@@ -12,6 +12,8 @@ bhhi_add_quarto <- function() {
   add_quarto_format()
 }
 
-add_quarto_format <- function(...) {
-  quarto::quarto_add_extension(extension = "ucsf-bhhi/bhhi-quarto", ...)
+add_quarto_format <- function(no_prompt = TRUE, ...) {
+  quarto::quarto_add_extension(
+    extension = "ucsf-bhhi/bhhi-quarto", no_prompt = no_prompt, ...
+  )
 }
