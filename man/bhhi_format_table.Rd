@@ -4,7 +4,12 @@
 \alias{bhhi_format_table}
 \title{Format Tables for Output}
 \usage{
-bhhi_format_table(table, full_width = TRUE, left_align_stub = TRUE)
+bhhi_format_table(
+  table,
+  full_width = TRUE,
+  left_align_stub = TRUE,
+  bottom_align_column_labels = TRUE
+)
 }
 \arguments{
 \item{table}{A \code{gt:gt} table object}
@@ -12,6 +17,9 @@ bhhi_format_table(table, full_width = TRUE, left_align_stub = TRUE)
 \item{full_width}{Table will fill the entire width of its container. Default is true.}
 
 \item{left_align_stub}{Text in table stub is left-aligned. Default is true.}
+
+\item{bottom_align_column_labels}{Text in column labels and spanners is
+bottom aligned vertically. Default is true.}
 }
 \value{
 The formatted table object.
