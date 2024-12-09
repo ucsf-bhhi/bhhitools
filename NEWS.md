@@ -1,3 +1,7 @@
+# bhhitools 0.6.4
+
+* Switched to CRAN version of `REDCapR` package.
+
 # bhhitools 0.6.2
 
 * Fixed bug with `bhhi_cascade()` when grouping by 3+ variables.

@@ -1,7 +1,7 @@
 Package: bhhitools
 Type: Package
 Title: Tools For BHHI R Users
-Version: 0.6.3
+Version: 0.6.4
 Authors@R: person("Eve", "Perry", email = "eve.perry@ucsf.edu", role = c("aut", "cre"))
 Description: A collection of functions to make R work at BHHI easier.
 Encoding: UTF-8
@@ -18,7 +18,7 @@ Imports:
     purrr,
     quarto,
     readr,
-    REDCapR (>= 1.1.9005),
+    REDCapR (>= 1.2.0),
     rlang,
     RStata (>= 1.4.0),
     srvyr,
@@ -28,8 +28,7 @@ Imports:
     withr,
     xml2
 Remotes: 
-    eveyp/RStata,
-    OuhscBbmc/REDCapR
+    eveyp/RStata
 Suggests: 
     labelled,
     testthat (>= 3.0.0),
